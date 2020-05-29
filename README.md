@@ -1,4 +1,9 @@
 # jogo-da-forca
+
+## v0.2
+* Adicionada uma forma de detectar que o jogador venceu (adivinhou todas as letras)
+
+## v0.1
 Somente para aprender a usar o GitHub enquanto também aprendo um pouco de Python.
 
 A ideia é criar um "jogo da forca" começando extremamente simples e rudimentar, e quem sabe torna-lo mais polido em futuras revisões.
