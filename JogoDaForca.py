@@ -1,4 +1,6 @@
-# Jogo da Forca v0.1
+# Jogo da Forca v0.2
+
+# - Adicionada uma forma de detectar que o jogador venceu (adivinhou todas as letras)
 
 def MontarTabuleiro(palavra):
     """
@@ -11,6 +13,7 @@ def MontarTabuleiro(palavra):
     O jogo é inválido se possuir caracteres especiais ou palavras com acento.
     """
     tabuleiro = ""
+    conta_letra = 0
 
     for caractere in palavra:
         if caractere == " ":
@@ -19,12 +22,13 @@ def MontarTabuleiro(palavra):
             tabuleiro += "- "
         elif caractere in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
             tabuleiro += "_ "
+            conta_letra += 1
         else:
             tabuleiro = ("Palavra contém caractere inválido.")
             JogoValido = False
             return [tabuleiro, JogoValido]
     JogoValido = True
-    return [list(tabuleiro), JogoValido]
+    return [list(tabuleiro), JogoValido, conta_letra]
 
 print("Bem-vindo(a) ao Jogo da Forca")
 palavra = input("Digite a palavra a ser adivinhada: ")
@@ -39,8 +43,8 @@ if not jogo[1]:
 
 # Começa o jogo
 else:
-    finalizado = False
-    while not finalizado:
+    conta_acerto = 0
+    while conta_acerto < jogo[2]:
         # O comando join() pega uma lista e a junta em uma string. Aqui, jogo[0] é o tabuleiro
         # em formato de lista, para que se possa substituir os elementos do tabuleiro.
         print(tabuleiro.join(jogo[0]))
@@ -50,9 +54,10 @@ else:
             for letra in palavra:
                 if letra == chute.upper():
                     jogo[0][i] = chute.upper()
-                    i = i + 2
-                else:
-                    i = i + 2
+                    conta_acerto += 1
+                i = i + 2
         else:
             print("Letra NÃO está na palavra")
-# print(len(palavra))
+
+print("\n" + tabuleiro.join(jogo[0]))
+print("Jogo encerrado, você venceu!")
